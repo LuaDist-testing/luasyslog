@@ -1,15 +1,15 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "luasyslog"
-version = "1.0.0-1"
+version = "1.0.0-2"
 -- LuaDist source
 source = {
-  tag = "1.0.0-1",
+  tag = "1.0.0-2",
   url = "git://github.com/LuaDist-testing/luasyslog.git"
 }
 -- Original source
 -- source = {
---    url = "http://lua.net-core.org/dl/telesto/luasyslog-1.0.0.tar.gz",
+--    url = "http://hisham.hm/tmp/luasyslog-1.0.0.tar.gz",
 -- }
 description = {
    summary = "Syslog logging for Lua",
@@ -24,18 +24,12 @@ dependencies = {
    "lualogging >= 1.1.4",
 }
 build = {
-   type = "make",
-   build_variables = {
-      LDFLAGS = "$(LIBFLAG)",
-      LUA_PREFIX = "$(LUA_DIR)"
-   },
-   install_variables = {
-      INSTALL_PREFIX = "$(LIBDIR)"
-   },
-   install_target = "install_nolua",
-   install = {
-      lua = {
-         ["logging.syslog"] = "syslog.lua",
-      }
+   type = "builtin",
+   modules = {
+      lsyslog = {
+         sources = "lsyslog.c",
+         defines = { "luaL_reg=luaL_Reg" },
+      },
+      ["logging.syslog"] = "syslog.lua",
    }
 }
